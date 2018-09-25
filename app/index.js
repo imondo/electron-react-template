@@ -5,6 +5,7 @@ const url = require('url');
 const setShortcut = require('./shortcut.js');
 
 let win;
+const setName = 'Mondo';
 
 function createWindow () {
   // 创建浏览器窗口。
@@ -44,7 +45,7 @@ function createWindow () {
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', createWindow);
 
-app.setName('Mondo');
+app.setName(setName);
 
 // 当全部窗口关闭时退出。
 app.on('window-all-closed', () => {
