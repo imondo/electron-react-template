@@ -9,7 +9,7 @@ const setName = 'Mondo';
 
 function createWindow () {
   // 创建浏览器窗口。
-  win = new BrowserWindow({width: 800, height: 600});
+  win = new BrowserWindow({width: 1200, height: 700});
 
   // 然后加载应用的 index.html。
   const startUrl = process.env.NODE_ENV === 'development'
