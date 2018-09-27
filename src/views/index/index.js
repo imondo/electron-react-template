@@ -31,7 +31,8 @@ class App extends Component {
     let { val } = this.state;
     if (val) {
       let { list } = this.state;
-      this.setState({ list });
+      list.unshift(val);
+      this.setState({ list, searchList: [] });
       this.refs.searchInput.input.input.value = '';
     }
   }
@@ -50,18 +51,18 @@ class App extends Component {
   render() {
     let { list, searchList } = this.state;
     let data = searchList.length ? searchList : list;
-    console.log(data);
     return (
       <div className="index-cover">
-        <h3>electron简单任务列表</h3>
+        <h2>Electron简单列表</h2>
         <div>
           <Search
             ref="searchInput"
             placeholder="请输入任务"
             onChange={this.getValue}
             onSearch={this.handleSearch}
+            onPressEnter={this.handleSearch}
           />
-          <Button className="btn-add" type="primary" onClick={this.handleAdd}>新建</Button>
+          <Button className="btn-add" type="primary" icon="plus" onClick={this.handleAdd} />
         </div>
         <ListItem 
           data={ data } 

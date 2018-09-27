@@ -9,16 +9,16 @@ const setName = 'Mondo';
 
 function createWindow () {
   // 创建浏览器窗口。
-  win = new BrowserWindow({width: 1200, height: 700});
+  win = new BrowserWindow({width: 1000, height: 600, transparent: true, resizable: true});
 
   // 然后加载应用的 index.html。
   const startUrl = process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
     : url.format({
-    pathname: path.join(__dirname, '/../build/index.html'),
-    protocol: 'file:',
-    slashes: true
-  });
+        pathname: path.join(__dirname, '../index.html'),
+        protocol: 'file:',
+        slashes: true
+    });
   
   win.loadURL(startUrl);
 
