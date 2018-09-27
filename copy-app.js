@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const appDir = path.join(__dirname + '/app');
-const buildDir = path.join(__dirname + '/build');
+const appDir = path.join(__dirname + '/app'); // electron 目录
+const buildDir = path.join(__dirname + '/build'); // react打包目录
+const distDir = path.join(__dirname + '/dist');  // electron打包目录
 
 const copyDir = (src, dist, callback) => {
   fs.access(dist, function(err){
@@ -45,8 +46,24 @@ const copyDir = (src, dist, callback) => {
   }
 }
 
+const removeDir = (path) => {
+  if( fs.existsSync(path) ) {
+    fs.readdirSync(path).forEach(function(file) {
+      let curPath = path + "/" + file;
+      if(fs.statSync(curPath).isDirectory()) { // recurse
+        removeDir(curPath);
+      } else {
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(path);
+  }
+};
+
 copyDir(appDir, buildDir + '/app', function(err){
   if(err){
     console.log(err);
   }
 });
+
+removeDir(distDir);

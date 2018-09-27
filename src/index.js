@@ -12,5 +12,6 @@ ReactDOM.render(
         <Redirect exact to="/login" />  
       </Switch>      
     </div>
-  </HashRouter >,
-  document.getElementById('root'));
+  </HashRouter>,
+  document.getElementById('root')
+);
