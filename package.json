@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "author": "Mondo <568197478@qq.com>",
   "private": true,
-  "main": "app/index.js",
+  "main": "src/main/index.js",
   "homepage": "./",
   "scripts": {
     "dev": "cross-env NODE_ENV=development concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
-    "pack": "npm run build:copy && electron-builder --win --x64",
-    "build:copy": "npm run react-build && npm run copy:electron",
-    "copy:electron": "node copy-app.js",
+    "pack": "npm run build",
+    "build": "npm run react-build && electron-builder --win --x64",
     "electron": "electron .",
     "react-start": "react-app-rewired start",
     "react-build": "react-app-rewired build",
@@ -21,10 +20,6 @@
     "files": [
       "build/**/*"
     ],
-    "publish": {
-      "provider": "github",
-      "private": false
-    },
     "win": {
       "target": "nsis"
     },
@@ -35,7 +30,7 @@
       ]
     },
     "extraMetadata": {
-      "main": "build/app/index.js"
+      "main": "build/main/index.js"
     },
     "directories": {
       "buildResources": "assets"
@@ -53,6 +48,7 @@
     "wait-on": "^3.0.1"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^4.5.2",
     "electron": "^3.0.0",
     "electron-builder": "^20.28.4",
     "less": "^3.8.1",

@@ -14,6 +14,8 @@ npm run dev
 npm run pack
 ```
 
+程序输出在`dist`目录
+
 * 注意
 
   该打包程序只针对 **Windows** 系统。
