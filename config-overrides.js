@@ -43,6 +43,7 @@ module.exports = {
         ignore: ['.*']
       }
     ]));
+    config.target = 'electron-renderer';
     return config;
   },
 }

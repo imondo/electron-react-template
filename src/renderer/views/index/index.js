@@ -3,6 +3,8 @@ import { Input, Button } from 'antd';
 import ListItem from './List';
 import './index.less';
 
+import { HandleTask } from './../../db/controller';
+
 const Search = Input.Search;
 
 class App extends Component {
@@ -15,8 +17,13 @@ class App extends Component {
       searchList: []
     }
   }
+
+  async componentWillMount() {
+    let list = await HandleTask.query();
+    this.setState({list}); 
+  }
   getValue = (e) => {
-    this.setState({ val: e.target.value });
+    this.setState({ val: e.target.value });    
   }  
   handleSearch = value => {
     if (value) {
@@ -32,12 +39,14 @@ class App extends Component {
     if (val) {
       let { list } = this.state;
       list.unshift(val);
+      HandleTask.add({title: val, time: new Date()});
       this.setState({ list, searchList: [] });
       this.refs.searchInput.input.input.value = '';
     }
   }
   handleRemove = index => {
     let { list } = this.state;
+    HandleTask.delete(list[index]);
     list.splice(index, 1);
     this.setState({ list });
   }
